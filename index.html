@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show/Hide Div Example</title>
+    <style>
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 500px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+
+        #content {
+            display: none;
+            padding: 20px;
+            background-color: lightpink;
+            margin-top: 20px;
+        }
+
+
+        button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 5;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #080e08;
+            color: white;
+        }
+
+        button:hover {
+            background-color: #6e45a0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>
+        <button id="toggleButton">Show Content</button>
+        <div class="container" id="content">
+            <div class="chat-messages" id="messages">
+                <div class="message" style="background-color: lightblue; text-align: left;">
+                    Hello! How can I help you?</div>
+            </div>
+            <div class="chat-input">
+                <textarea id="userInput" rows="1" placeholder="type here"></textarea>
+                <button id="sendButton">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const toggleButton = document.getElementById('toggleButton');
+        const contentDiv = document.getElementById('content');
+        const sendButton = document.getElementById('sendButton');
+        const messagesDiv = document.getElementById('messages');
+        const userInput = document.getElementById('userInput');
+
+        toggleButton.addEventListener('click', function () {
+            if (contentDiv.style.display === 'none') {
+                contentDiv.style.display = 'block';
+                toggleButton.textContent = 'Hide Content';
+            } else {
+                contentDiv.style.display = 'none';
+                toggleButton.textContent = 'Show Content';
+            }
+        });
+
+        sendButton.addEventListener('click', function () {
+            const message = userInput.value.trim();
+            if (message) {
+                const userMessage = document.createElement('div');
+                userMessage.classList.add('message', 'user');
+                userMessage.textContent = message;
+                messagesDiv.appendChild(userMessage);
+                userInput.value = '';
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            }
+
+        })
+
+
+
+    </script>
+
+</body>
+
+</html>
