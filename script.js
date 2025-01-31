@@ -1,7 +1,29 @@
-console.log("hello world!")
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.getElementById("toggleButton");
+    const contentDiv = document.getElementById("content");
+    const sendButton = document.getElementById("sendButton");
+    const messagesDiv = document.getElementById("messages");
+    const userInput = document.getElementById("userInput");
 
-console.log("JavaScript file is successfully linked!");
+    toggleButton.addEventListener("click", function () {
+        if (contentDiv.style.display === "none" || contentDiv.style.display === "") {
+            contentDiv.style.display = "block";
+            toggleButton.textContent = "Hide Content";
+        } else {
+            contentDiv.style.display = "none";
+            toggleButton.textContent = "Show Content";
+        }
+    });
 
-function showMessage() {
-    alert("Hello from the JavaScript file!");
-}
+    sendButton.addEventListener("click", function () {
+        const message = userInput.value.trim();
+        if (message) {
+            const userMessage = document.createElement("div");
+            userMessage.classList.add("message", "user");
+            userMessage.textContent = message;
+            messagesDiv.appendChild(userMessage);
+            userInput.value = "";
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+    });
+});
