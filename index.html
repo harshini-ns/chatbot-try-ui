@@ -6,26 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatBot</title>
     <style>
+        .background-iframe {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
         .container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            position: fixed;
+            bottom: 60px;
+            right: 10px;
             width: 400px;
             height: 500px;
             padding: 20px;
             text-align: center;
-            border: 1px solid #ddd;
+            border: 1px solid #180d0d;
             border-radius: 10px;
             background-color: #f9f9f9;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(42, 23, 214, 0.1);
             overflow-y: auto;
+            gap: 10px;
+            /* Add space between textarea and button */
         }
 
         #content {
             display: none;
             padding: 20px;
-            background-color: lightpink;
+            background-color: grey;
             margin-top: 20px;
         }
 
@@ -49,84 +59,98 @@
 
         .chat-messages {
             height: 400px;
-            /* Adjust as needed */
             overflow-y: auto;
             display: flex;
             flex-direction: column;
+            padding: 10px;
+            border-radius: 8px;
+            background: grey;
         }
 
         .message {
-            margin: 5px;
-            padding: 10px;
+            margin: 6px;
+            padding: 12px;
             border-radius: 10px;
-            max-width: 70%;
+            max-width: 75%;
+            font-size: 14px;
+            word-wrap: break-word;
         }
 
         .message.user {
             align-self: flex-end;
-            background-color: #007bff;
+            background-color: black;
             color: white;
+            border-top-right-radius: 0;
         }
 
         .message.bot {
             align-self: flex-start;
-            background-color: #dbe9bd;
+            background-color: #e9ecef;
             color: black;
+            border-top-left-radius: 0;
         }
 
+
+
+        /* Chat Input */
         .chat-input {
-            margin-top: 10px;
-            display: flex;
-        }
-
-        #userInput {
-            flex-grow: 1;
-            margin-right: 10px;
-        }
-
-        .chat-input {
-            margin-top: 10px;
             display: flex;
             align-items: center;
-            /* This aligns items vertically */
-            background-color: lightyellow;
-            padding: 10px;
-            border-top: 1px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            gap: 10px;
+            width: 100%;
+            /* Adjust width */
+            padding: 5px;
+            /* Add some padding */
         }
 
+        /* Input Box */
         #userInput {
-            flex-grow: 1;
-            margin-right: 10px;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
             resize: none;
-            /* Prevents textarea from being resizable */
+            outline: none;
+            height: 40px;
+            height: 40px;
+            /* Same height as button */
+            box-sizing: border-box;
+            /* Ensure padding doesn't affect height */
         }
 
+        /* Send Button */
         #sendButton {
-            padding: 8px 15px;
-            background-color: #007bff;
+            padding: 10px 15px;
+            background: #007bff;
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
+            transition: 0.3s;
+            font-size: 14px;
+            height: 40px;
         }
 
         #sendButton:hover {
-            background-color: #0056b3;
+            background: #0056b3;
         }
     </style>
 </head>
 
 <body>
 
+    <iframe src="https://days-inn-project.vercel.app/hotels" frameborder="0" class="background-iframe"></iframe>
+
     <div>
         <button id="toggleButton">Chatbot</button>
         <div class="container" id="content">
             <div class="chat-messages" id="messages"></div>
-            <div class="chat-input" style="background-color: lightyellow; text-align: right;">
-                <textarea id="userInput" rows="1" placeholder="Ask chatbot here..."></textarea>
+            <div class="chat-input">
+                <textarea id="userInput" placeholder="Ask chatbot here..."></textarea>
                 <button id="sendButton">Send</button>
             </div>
         </div>
